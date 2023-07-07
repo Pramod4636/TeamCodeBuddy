@@ -34,7 +34,8 @@ const NavLinkWithHoverEffect = ({ children }: { children: ReactNode }) => (
     {children}
   </Link>
 );
-const NavLink = ({ children }: { children: ReactNode }) => (
+const NavLink = ({ children }: { children: ReactNode }) =>
+ (
   <NextLink href={children[1]}>{children[0]}</NextLink>
 );
 
@@ -96,6 +97,7 @@ export default function withAction() {
               </>
             )}
           </HStack>
+          
         </Flex>
       </Box>
     </Flex>

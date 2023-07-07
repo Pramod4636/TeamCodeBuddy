@@ -30,6 +30,7 @@ const Room = (props) => {
 		});
 	});
 
+	 console.log("hello");
 	const manageSize = () => {
 		if (isChatOpen) {
 			setEditorSize(10);
@@ -70,6 +71,8 @@ const Room = (props) => {
 				h="80vh"
 				templateRows="repeat(1, 1fr)"
 				templateColumns="repeat(10, 1fr)">
+
+
 				<GridItem colSpan={editorSize}>
 					<CompilerController roomId={id as string} />
 				</GridItem>
@@ -90,7 +93,11 @@ const Room = (props) => {
 						</Box>
 					) : null}
 				</GridItem>
+
+
 			</Grid>
+
+
 		</div>
 	);
 };

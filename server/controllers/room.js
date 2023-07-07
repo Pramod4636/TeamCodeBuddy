@@ -44,11 +44,13 @@ const getRoomsOfUser = async (req, res) => {
 };
 
 const joinRoom = async (req, res) => {
+  console.log(req.body);
   const { email, roomId, password } = req.body;
 
   if (!email || !roomId || !password) {
     res.status(422).json({ error: "please add all field" });
   } else {
+    
     Room.findByPk(roomId)
       .then(async (savedRoom) => {
         if (!savedRoom) {
@@ -71,6 +73,7 @@ const joinRoom = async (req, res) => {
         }
       })
       .catch((err) => {
+        console.log("hii");
         console.log(err);
       });
   }
