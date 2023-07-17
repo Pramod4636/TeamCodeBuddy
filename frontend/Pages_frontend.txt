@@ -1,0 +1,26 @@
+$$$$ Nextjs : framework for building react application 
+-> provide Server-side redering (SSR )
+-> It provides a streamlined and efficient way to create pages and 
+handle routing in your application
+
+-> Automatic Routing: Next.js provides automatic routing based on the file system.
+
+->Server-side Rendering (SSR): means that the initial HTML content of your pages is generated on the server and sent to the client
+
+->Daynamic Pages :  allowing you to create pages with dynamic parameters in the URL. [id].js
+dynamic parameter is accessible through the useRouter
+
+-> File-based Routing: With Next.js, you have the flexibility to choose between file-based routing (static routing) and API-based routing. You can mix 
+and match these routing approaches based on your application's needs.
+---------------------------------
+
+-> index page : NavBar and langind page 
+
+_app.tsx : staring point for your next.js application . 
+. It wraps your entire application with necessary providers and sets up the global configuration.
+wrpas application with chakraProvider for styling 
+Auth0Provider for authenticaiotn . 
+
+index.ts : Navbar and Lading page imort  
+defauilt page 
+

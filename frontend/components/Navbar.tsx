@@ -7,7 +7,7 @@ import {
   IconButton,
   Link,
   useColorModeValue,
-  useDisclosure,
+  useDisclosure, // IMP : 
 } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 import { ColorModeSwitch } from "./ColorModeSwitch";
@@ -21,6 +21,9 @@ const Links = [
   ["Create Room", "/createroom"],
   ["Join Room", "/joinroom"],
 ];
+
+
+
 const NavLinkWithHoverEffect = ({ children }: { children: ReactNode }) => (
   <Link
     px={2}
@@ -34,9 +37,11 @@ const NavLinkWithHoverEffect = ({ children }: { children: ReactNode }) => (
     {children}
   </Link>
 );
+
+// IMP
 const NavLink = ({ children }: { children: ReactNode }) =>
  (
-  <NextLink href={children[1]}>{children[0]}</NextLink>
+  <NextLink href={children[1]}>{children[0]}</NextLink>  
 );
 
 export default function withAction() {

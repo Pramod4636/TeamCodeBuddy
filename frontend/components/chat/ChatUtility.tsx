@@ -65,6 +65,7 @@ export const ChatUtility: React.FC<ChatUtilityProps> = ({
 		scrollRef.current.scrollIntoView({ behavior: "smooth" });
 	}, [messages]);
 
+	
 	return (
 		<div>
 			{messages.map((msg, i) => {

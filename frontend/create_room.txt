@@ -1,0 +1,11 @@
+$$$ CreateRoom : 
+from input -> sending request post to using axios js libarry 
+userdata taken from -> useAuth0hook 
+user object present insitde useAuth0Hook from which we are taking information . 
+------------------------------------------
+$$$ Create room : 
+roomid -> response from server 
+email , rommnae -> useState used ( form input user intercation sobat vaible also required to change for that we 
+used useState ) . 
+------------------------------------------
+

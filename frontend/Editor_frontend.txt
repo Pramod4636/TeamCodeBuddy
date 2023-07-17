@@ -1,0 +1,190 @@
+$$$$ Editor Part : 
+
+$$$$$ daynamic feature : 
+daynamic next.js feature : 
+solve problem : When we use the regular import statement in JavaScript, all the imported modules are loaded and processed before the code execution starts. This means that even if a specific module is not immediately needed, it will still be loaded and initialized during the initial page load. 
+->Dynamic imports in Next.js allow for loading components asynchronously, improving performance by loading components only when needed.
+->The dynamic function is specific to Next.js and is not available in React by default.
+->Dynamic imports split application code into smaller chunks, loading them on-demand instead of during the initial page load.
+This approach improves initial load time, optimizes performance, and enhances the user experience.
+->Loading components dynamically prioritizes essential parts of the application and reduces unnecessary delays.
+->Overall, dynamic imports in Next.js provide a more efficient and faster loading experience for users.
+--------------------------------------------
+$$$$$ useDisclosure : hook provided by chakra ui to 
+-> The useDisclosure hook provides a simple way to manage the state of the disclosure component, allowing you to control its visibility and handle the necessary actions or transitions when it is revealed or hidden.
+-> visibility of some compoent manage karte 
+-> button click  then show comopent  , click then hide compoent 
+-> isOpen value of open or not , onOpen -> function that change the state to open 
+onClose funciton that change state to close . 
+--------------------------------------------------
+$$$$$ useClipboard hook provided by chakraui 
+reason : to copying the specified url to users clipboard . 
+
+--------------------------------------------------------
+$$$$$ useRouter : hook by next.js 
+-> gives router object : contains information aobut current route and 
+-> 2 things use  : programiticaly navigate to different pages 
+   and query paraterms in url can acces  router.querey
+----------------------------------------------------------------------------
+$$$$$ state maintained such that changes then compoent is rerendered : 
+number, language, theme, fontSize, isOpen 
+code, input, output, statusId, status, 
+isRunning
+----------------------------------------------------------------------------
+$$$$$ Editor is opend 2 times when room is created 
+when room is join  when room join then required the currnt code in room display .
+useEffect()  get request is send to "/code/" + roomId 
+response :  common code in room that is same for all roomates is fethed 
+
+----------------------------------------------------------------------------
+$$$$$ onShare : 1 post reqest 
+"/api/shareCode", { phone: number, code: code } 
+
+onLeave : 1 post reqursst send and naviagte to home page 
+"/api/room/exitRoom", { email: user.email, roomId: id }
+
+----------------------------------------------------------------------------
+$$$$$ getOutput : funciton that used for  retrieves the output of a code execution based on a given statusId
+->How :  It makes an API request to get the details of the execution and 
+extracts the stdout, stderr, and build_stderr from the response
+get(`/get_details?id=${statusId}&api_key=guest`);   IMP : statusID what is understand Raminng  . 
+-> It updates the output state with the concatenated output strings and  
+emits the output to the server using Socket.IO
+->  If the execution status is not "completed", it recursively calls getOutput until the status becomes "completed".
+-> Finally, it updates the status, isRunning, and statusId states accordingly. If an error occurs, it sets isRunning to false and logs the error.
+
+----------------------------------------------------------------------------
+$$$$$ SOket_IO how works : 
+-> connection is estiblised among users using soket io 
+-> 1 user send object goto all other user : 
+    .emit( eventName , dataToPass ) -> function sedn data to server 
+    and all users that listingnig this event sever send  
+    .on() : event using on(eventName , funciton that r) or similar methods and access the emitted data payload. For instance, socket.on("newMessage", (data) => { console.log(data.text) }) listens for the "newMessage" event and logs the received message text to the console.
+----------------------------------------------------------------------------
+$$$$$ statusId changes : getOutput funciotn function is executed as defined above .
+work : fetches output block (when we join the rooom we required to change     )
+
+----------------------------------------------------------------------------
+$$$$$ onRun : function that execute when run button click 
+what we doing : 2 request send to server 
+req1 : code and roomid await axios.post(SERVER_URL + "/code", data); for execution 
+code execution is done 
+req2 : send request to  
+        post("/create", {
+				source_code: code,
+				language: language,
+				api_key: "guest",
+				input,
+			});
+setStatus ID and status are updated . 
+--------------------------------------------------------------------------
+$$$$$ useEffect listen to 3 events for simultanueos communication input , code , language 
+.on()  : used to listen event 
+"editor" event : gives code and update code state 
+"input" event : gives input  and update messge statte  
+"language" event : gives lanuge and update langugae state . 
+
+----------------------------------------------------------------------------
+$$$$$ editor change reflection in others editor : 
+done by events : onchange  1 function exectue 
+that emits() : "editor" event   sends  e  and id 
+
+----------------------------------------------------------------------------
+$$$$ output changes : 
+"output" soket event is listen  and set outputstate . 
+-------------------------------------------------------
+$$$$ Custom hook made : useDisclosure in utility 
+-> what purpose : 
+useDebouncedEffect is useful in situations 
+where you want to optimize performance by 
+IMP : delaying the execution of an effect until a certain delay has passed, 
+reducing unnecessary computations or API calls.
+function : 
+-> implementation : 
+It takes an effect function, an array of dependencies, and a delay duration as parameters.
+useEffect is used and inside setTimeoutFunction is used . 
+effect fucntion is delayed by the specified duration before executing, 
+
+-> use : control the timing of side effects, such as making API requests or updating the UI, based on a delay and specific dependencies.
+--------------------------------------------------
+$$$$$ Code changes then make request to server : 
+-> impleted using custom hook useDebouncedEffect
+-> as code change after 5 second of change post request is send . 
+-> effect function : sends a POST request to a server endpoint /code with the code and roomId data.
+dependancy  : code 
+time : 5000 ( milisecond ) 
+
+--------------------------------------------------------------------
+$$$$$ UI of Editor : 
+Desing  :
+Part1 : 
+Upper Navbar :  
+3 Dropdown : Langue , theme , Font SIze
+3 button : Save and RUn , Copy inpfo , leave Room
+Whatsapp Sherring icon 
+
+part2 : 
+3 editor : code & input & output  
+
+How chakara ui  used : 
+-> SimpleGrid : In Navbar arrange and align elements in a grid format : 
+ SimpleGrid compenet used to create grid layout with eqall sized cells 
+specify the number of columns and the spacing between the cells.
+
+-> code and input/output : 
+The Center component is used to horizontally center the content, and 
+the Flex component is used to create a flexible container to hold the editors. 
+Inside the Flex component, there are two Box components, 
+one for the code editor and one for the input/output editors.
+
+
+
+--------------------------------------------------------------------
+$$$$$ Editor Compent : 
+-> My aim is to provide syntax highlighting for each language and autocompoletion of code , thems are applied 
+-> how i made this component : Ace editor powerful code editor is used . 
+-> programmer code writing problem nahi yayla hawa 
+
+-------------
+- React compoent Wrapper is higher-level compoent 
+It acts as a container or a decorator for the wrapped component, 
+enhancing its behavior or appearance.
+
+- react-ace library used to integrate Ace editor (code editor developed in javascript)
+- It provides a React component that you can use to render the code editor 
+and control its behavior through props and event handlers ( lanugese , fontsize ,mode ,Onchange hadler function )
+
+- Ace Editor  : 
+Ace editor is an open-source code editor e seamlessly integrated into web applications
+ It offers a wide range of features such as 
+ syntax highlighting, code completion, code folding, 
+ multiple cursors, search and replace, and customizable themes. 
+
+- dynamic importing is used to load the necessary components and modules asynchronously 
+at runtime instead of during the initial rendering. 
+- lanuge passed prop realted modules imported . 
+
+-The EditorComp component is created using dynamic and configured with an asynchronous function as the first parameter. 
+This function is responsible for dynamically loading the necessary modules and components.
+- consider a scenario where you have a large number of programming languages 
+and themes available for the editor. Instead of loading all the language modes, snippets, and themes upfront, which would increase the bundle size and slow down the initial page load, 
+dynamic importing allows you to load only the necessary modules when they are actually needed.
+
+
+
+--------------------------------------------------------------------
+$$$$$
+
+
+--------------------------------------------------------------------
+$$$$$
+
+
+--------------------------------------------------------------------
+$$$$$
+
+
+--------------------------------------------------------------------
+
+
+
