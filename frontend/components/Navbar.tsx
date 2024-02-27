@@ -66,7 +66,7 @@ export default function withAction() {
           <HStack spacing={8} alignItems={"center"}>
             <i>
               <Box>
-                <strong>Chat-Collaborator</strong>
+                <strong>TeamCodeEasy</strong>
               </Box>
             </i>{" "}
             {Links.map((link) => (

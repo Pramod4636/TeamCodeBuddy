@@ -1,4 +1,5 @@
 import { ChatIcon } from "@chakra-ui/icons";
+
 import {
   Box,
   Button,
@@ -14,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { SERVER_URL } from "../../utils/constants";
 import { ChatUtility } from "./ChatUtility";
 import { useAuth0 } from "@auth0/auth0-react";
+
 
 export const ChatButton = () => {
   const { onOpen } = useDisclosure();

@@ -100,6 +100,7 @@ export default function CompilerCnntroller({ roomId }): JSX.Element {
 	const [code, setCode] = useState<String>("");
 	const [input, setInput] = useState<String>("");
 	const [output, setOutput] = useState<String>("");
+
 	const [statusId, setStatusId] = useState<String>("");
 	const [status, setStatus] = useState<String>("idel");
 	const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -225,6 +226,7 @@ export default function CompilerCnntroller({ roomId }): JSX.Element {
 			setLanguage(msg);
 		});
 	});
+	
 	const onChangeEditor = (e) => {
 		SOCKET_IO.emit("editor", e, id);
 	};

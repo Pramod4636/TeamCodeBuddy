@@ -81,7 +81,6 @@ const joinRoom = async (req, res) => {
 
 const codeSave = async (req, res) => {
   let { roomId, code } = req.body;
-
   const room = await Room.findByPk(roomId);
   room.code = code;
   await room.save();
