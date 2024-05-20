@@ -8,7 +8,7 @@ server.use(cors());
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
-const PORT = 8088;
+const PORT = 8080;
 
 
 server.use("/api", require('./routes/message'));

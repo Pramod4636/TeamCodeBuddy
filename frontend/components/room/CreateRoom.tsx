@@ -33,6 +33,7 @@ export default function CreateRoom(): JSX.Element {
 			})
 			.catch((err) => {
 				// handle error
+				console.log(err);
 			});
 	};
 
